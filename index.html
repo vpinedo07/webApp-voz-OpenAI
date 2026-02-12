@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Órdenes por voz + OpenAI</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
+    <div class="container">
+      <a class="navbar-brand fw-semibold" href="#">Voice Orders</a>
+      <span class="badge rounded-pill text-bg-secondary" id="modeBadge">Inicializando…</span>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="row g-4">
+      <div class="col-12 col-lg-5">
+        <div class="card shadow-sm glass">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Estado</h5>
+
+            <div class="d-flex align-items-center gap-2 mb-3">
+              <div class="status-dot" id="statusDot"></div>
+              <div>
+                <div class="fw-semibold" id="statusText">Preparando reconocimiento…</div>
+                <div class="text-secondary small" id="statusHint">Permite el micrófono si el navegador lo solicita.</div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="btn btn-primary" id="btnStart">
+                Iniciar / Reintentar
+              </button>
+              <button class="btn btn-outline-light" id="btnStop">
+                Detener
+              </button>
+              <button class="btn btn-outline-warning" id="btnSleep">
+                Suspender
+              </button>
+            </div>
+
+            <hr class="border-secondary my-4"/>
+
+            <div class="small text-secondary">
+              <div class="mb-1"><span class="fw-semibold">Wake word:</span> “Alexa”</div>
+              <div class="mb-1"><span class="fw-semibold">Modo suspendido:</span> solo escucha “Alexa”.</div>
+              <div><span class="fw-semibold">Consejo:</span> usa HTTPS o localhost para SpeechRecognition.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mt-4">
+          <div class="card-body">
+            <h6 class="mb-2">Última orden (salida final)</h6>
+            <div class="display-6 fw-bold" id="finalCommand">—</div>
+            <div class="text-secondary small mt-2" id="openaiInfo">OpenAI: listo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+              <h5 class="card-title mb-0">Transcripción</h5>
+              <div class="text-secondary small">
+                Inactividad → suspendido automático
+              </div>
+            </div>
+
+            <div class="mt-3 transcript-box" id="transcriptBox">
+              <div class="text-secondary">Aún no hay voz detectada…</div>
+            </div>
+
+            <div class="mt-3 d-flex align-items-center gap-2">
+              <div class="spinner-border spinner-border-sm d-none" id="spinner" role="status"></div>
+              <div class="text-secondary small" id="aiStatus">La IA responderá con una sola etiqueta de movimiento.</div>
+            </div>
+
+            <hr />
+
+            <!-- <div class="alert alert-warning mb-0">
+              <div class="fw-semibold">Seguridad</div>
+              <div class="small">
+                No pongas tu API Key en el frontend. En producción usa un backend/proxy. (Más abajo te indico dónde cambiarlo.)
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div class="card shadow-sm mt-4">
+          <div class="card-body">
+            <h6 class="mb-2">Órdenes soportadas</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="chip">avanzar</span>
+              <span class="chip">retroceder</span>
+              <span class="chip">detener</span>
+              <span class="chip">vuelta derecha</span>
+              <span class="chip">vuelta izquierda</span>
+              <span class="chip">90° derecha</span>
+              <span class="chip">90° izquierda</span>
+              <span class="chip">360° derecha</span>
+              <span class="chip">360° izquierda</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-4 border-top border-secondary bg-dark text-light">
+    <div class="container small d-flex justify-content-between flex-wrap gap-2">
+      <div>Desarrollado por: <span class="fw-semibold">Victor Pinedo</span></div>
+      <div>TecNM / Instituto Tecnológico de Pachuca</div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
